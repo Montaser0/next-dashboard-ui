@@ -1,6 +1,7 @@
+import React from "react"
 const Homepage = () => {
   return (
-    <div className=''>Homepage</div>
+    <div className=''>الصفحة الرئيسية</div>
   )
 }
 
