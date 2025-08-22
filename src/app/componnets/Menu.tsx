@@ -158,7 +158,7 @@ const Menu = () => {
                     alt={item.label} 
                     width={16} 
                     height={16} 
-                    className='opacity-70 group-hover:opacity-100 transition-opacity duration-200'
+                    className='opacity-70 group-hover:opacity-100 transition-opacity duration-200 '
                   />
                 </div>
                 <span className='hidden lg:block font-medium text-sm'>{item.label}</span>
