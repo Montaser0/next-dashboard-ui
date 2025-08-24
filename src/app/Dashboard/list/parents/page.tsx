@@ -8,7 +8,7 @@ import { role, parentsData } from "@/lib/data";
 interface IParent {
     name: string;
     photo: string;
-    students: string;
+    students: string[];
     phone: string;
     address: string;
     email?: string;
@@ -31,11 +31,7 @@ const columns = [
         accessor: "phone",
         className: "text-center",
     },
-    {
-        name: "البريد الإلكتروني",
-        accessor: "email",
-        className: "text-center",
-    },
+
 
     {
         name: "العنوان",
@@ -58,7 +54,7 @@ const Parents = () => {
                     <h4 className="text-xs text-gray-500">{item?.email}</h4>
                 </div>
             </td>
-            <td className="hidden md:table-cell text-center">{item.students}</td>
+            <td className="hidden md:table-cell text-center">{item.students.join(", ")}</td>
             <td className="hidden md:table-cell text-center">{item.phone}</td>
             <td className="hidden lg:table-cell text-center">{item.address}</td>
             <td>
@@ -81,7 +77,7 @@ const Parents = () => {
     return (
         <div className="bg-white p-4 rounded-md mt-4" dir="rtl">
             <div className="flex items-center justify-between">
-                <h1 className="hidden md:block text-lg font-semibold mr-2">قائمة الطلاب</h1>
+                <h1 className="hidden md:block text-lg font-semibold mr-2">قائمة  اولياء الامور</h1>
                 <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                     <Search />
                     <div className="flex items-center gap-4">
