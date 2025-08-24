@@ -31,6 +31,11 @@ const columns = [
         accessor: "phone",
         className: "text-center",
     },
+    {
+        name: "البريد الإلكتروني",
+        accessor: "email",
+        className: "text-center",
+    },
 
     {
         name: "العنوان",
@@ -48,10 +53,9 @@ const Parents = () => {
     const renderRow = (item: IParent) => (
         <tr key={item.id} className="hover:bg-slate-100 border-b even:bg-slate-50">
             <td className="w-full md:w-auto flex flex-row gap-3 m-3">
-                <Image src={item.photo} alt={item.name} width={40} height={40} className="md:hidden xl:block w-10 h-10 rounded-full object-cover" />
                 <div className="flex flex-col">
                     <h3 className="font-semibold">{item.name}</h3>
-                    <h4 className="text-xs text-gray-500">{item?.students}</h4>
+                    <h4 className="text-xs text-gray-500">{item?.email}</h4>
                 </div>
             </td>
             <td className="hidden md:table-cell text-center">{item.students}</td>
