@@ -92,7 +92,7 @@ const menuItems = [
       {
         icon: "/announcement.png",
         label: "الإعلانات",
-        href: "/Dashboard/announcements",
+        href: "/Dashboard/list/announcements",
         visible: ["admin", "teacher", "student", "parent"],
       },
     ],
