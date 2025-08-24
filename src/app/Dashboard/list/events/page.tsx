@@ -4,40 +4,43 @@ import Table from "@/app/componnets/Table";
 import Link from "next/link";
 
 import Image from "next/image";
-import { role, parentsData } from "@/lib/data";
-interface IParent {
-    name: string;
-    photo: string;
-    students: string[];
-    phone: string;
-    address: string;
-    email?: string;
+import { role, eventsData } from "@/lib/data";
+interface IEvent {
+    title: string;
+    class: string;
+    date : string;
+    startTime : string;
+    endTime : string;
     id: number;
 }
 
 const columns = [
     {
-        name: "اسم ولي الامر",
-        accessor: "name",
+        name: "اسم الحدث",
+        accessor: "title",
         className: "text-center",
     },
     {
-        name: "الطلاب",
-        accessor: "students",
+        name: "الصف",
+        accessor: "class",
         className: "hidden md:table-cell text-center",
     },
     {
-        name: "رقم الهاتف",
-        accessor: "phone",
-        className: "hidden md:table-cell text-center",
+        name: "التاريخ",
+        accessor: "date",
+        className: "hidden md:table-cell  text-center",
     },
-
-
     {
-        name: "العنوان",
-        accessor: "address",
-        className: "hidden md:table-cell hidden lg:table-cell text-center",
+        name: "وقت البداية",
+        accessor: "startTime",
+        className: "hidden md:table-cell  text-center",
     },
+    {
+        name: "وقت الانتهاء",
+        accessor: "endTime",
+        className: "hidden md:table-cell  text-center",
+    },
+
     {
         name: "الاجراءات",
         accessor: "actions",
@@ -45,21 +48,21 @@ const columns = [
     },
 
 ]
-const Parents = () => {
-    const renderRow = (item: IParent) => (
+const Events = () => {
+    const renderRow = (item: IEvent) => (
         <tr key={item.id} className="hover:bg-slate-100 border-b even:bg-slate-50">
             <td className="w-full md:w-auto flex flex-row gap-3 m-3">
                 <div className="flex flex-col">
-                    <h3 className="font-semibold">{item.name}</h3>
-                    <h4 className="text-xs text-gray-500">{item?.email}</h4>
+                    <h3 className="font-semibold">{item.title}</h3>
                 </div>
             </td>
-            <td className="hidden md:table-cell text-center">{item.students.join(", ")}</td>
-            <td className="hidden md:table-cell text-center">{item.phone}</td>
-            <td className="hidden lg:table-cell text-center">{item.address}</td>
-            <td>
+            <td className="hidden md:table-cell text-center">{item.class}</td>
+            <td className="hidden lg:table-cell text-center">{item.date}</td>
+            <td className="hidden md:table-cell text-center">{item.startTime}</td>
+            <td className="hidden md:table-cell text-center">{item.endTime}</td>
+            <td>    
                 <div className="flex items-center gap-2">
-                    <Link href={`/Dashboard/list/students/${item.id}`}>
+                    <Link href={`/Dashboard/list/events/${item.id}`}>
                         <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky p-2">
                             <Image src="/edit.png" alt="edit" width={20} height={20} />
                         </button>
@@ -77,7 +80,7 @@ const Parents = () => {
     return (
         <div className="bg-white p-4 rounded-md mt-4" dir="rtl">
             <div className="flex items-center justify-between">
-                <h1 className="hidden md:block text-lg font-semibold mr-2">قائمة  اولياء الامور</h1>
+                <h1 className="hidden md:block text-lg font-semibold mr-2">قائمة الاحداث</h1>
                 <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                     <Search />
                     <div className="flex items-center gap-4">
@@ -93,11 +96,11 @@ const Parents = () => {
                     </div>
                 </div>
             </div>
-            <Table columns={columns} renderRow={renderRow} data={parentsData} />
+            <Table columns={columns} renderRow={renderRow} data={eventsData} />
             <Pagination />
         </div>
     );
 };
 
-export default Parents;
+export default Events;
 

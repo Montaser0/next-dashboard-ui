@@ -9,7 +9,7 @@ interface IAssignment {
     subject: string;
     class: string;
     teacher: string;
-    date: string;
+    dueDate : string;
     id: number;
 }
 
@@ -33,8 +33,8 @@ const columns = [
 
     {
         name: "التاريخ",
-        accessor: "date",
-        className: "hidden md:table-cell hidden lg:table-cell text-center",
+        accessor: "dueDate",
+        className: "hidden md:table-cell  text-center",
     },
     {
         name: "الاجراءات",
@@ -53,12 +53,12 @@ const Assignments = () => {
             </td>
             <td className="hidden md:table-cell text-center">{item.class}</td>
             <td className="hidden md:table-cell text-center">{item.teacher}</td>
-            <td className="hidden lg:table-cell text-center">{item.date}</td>
-            <td>
+            <td className="hidden lg:table-cell text-center">{item.dueDate}</td>
+            <td>    
                 <div className="flex items-center gap-2">
-                    <Link href={`/Dashboard/list/students/${item.id}`}>
+                    <Link href={`/Dashboard/list/assignments/${item.id}`}>
                         <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky p-2">
-                            <Image src="/view.png" alt="view" width={20} height={20} />
+                            <Image src="/edit.png" alt="edit" width={20} height={20} />
                         </button>
                     </Link>
                     {role === "admin" && (

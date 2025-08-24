@@ -67,9 +67,10 @@ const menuItems = [
       {
         icon: "/result.png",
         label: "النتائج",
-        href: "/Dashboard/results",
+        href: "/Dashboard/list/results",
         visible: ["admin", "teacher", "student", "parent"],
       },
+  
       {
         icon: "/attendance.png",
         label: "الحضور",
@@ -79,7 +80,7 @@ const menuItems = [
       {
         icon: "/calendar.png",
         label: "الأحداث",
-        href: "/Dashboard/events",
+        href: "/Dashboard/list/events",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {

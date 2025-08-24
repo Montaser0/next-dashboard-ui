@@ -59,9 +59,9 @@ const Exams = () => {
             <td className="hidden lg:table-cell text-center">{item.date}</td>
             <td>
                 <div className="flex items-center gap-2">
-                    <Link href={`/Dashboard/list/students/${item.id}`}>
+                    <Link href={`/Dashboard/list/exams/${item.id}`}>
                         <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky p-2">
-                            <Image src="/view.png" alt="view" width={20} height={20} />
+                            <Image src="/edit.png" alt="edit" width={20} height={20} />
                         </button>
                     </Link>
                     {role === "admin" && (
