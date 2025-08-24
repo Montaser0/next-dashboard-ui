@@ -36,7 +36,7 @@ const menuItems = [
       {
         icon: "/parent.png",
         label: "اولياء الامور",
-        href: "/Dashboard/parent",
+        href: "/Dashboard/list/parents",
         visible: ["admin", "teacher"],
       },
       {
