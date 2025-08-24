@@ -168,55 +168,56 @@ export const parentsData = [
 export const subjectsData = [
   {
     id: 1,
-    name: "Math",
-    teachers: ["Alice Phelps", "Russell Davidson"],
+    name: "رياضيات",
+    teachers: ["أحمد علي"],
   },
   {
     id: 2,
-    name: "English",
-    teachers: ["Manuel Becker", "Eddie Chavez"],
+    name: "لغة إنجليزية",
+    teachers: ["سارة محمد"],
   },
   {
     id: 3,
-    name: "Physics",
-    teachers: ["Lola Newman", "Darrell Delgado"],
+    name: "فيزياء",
+    teachers: ["محمد حسن"],
   },
   {
     id: 4,
-    name: "Chemistry",
-    teachers: ["Nathan Kelly", "Benjamin Snyder"],
+    name: "كيمياء",
+    teachers: ["محمد حسن"],
   },
   {
     id: 5,
-    name: "Biology",
-    teachers: ["Alma Benson", "Lina Collier"],
+    name: "أحياء",
+    teachers: ["يوسف عبد الله"],
   },
   {
     id: 6,
-    name: "History",
-    teachers: ["Hannah Bowman", "Betty Obrien"],
+    name: "تاريخ",
+    teachers: ["سارة محمد", "علياء سامي"],
   },
   {
     id: 7,
-    name: "Geography",
-    teachers: ["Lora French", "Sue Brady"],
+    name: "جغرافيا",
+    teachers: ["سارة محمد"],
   },
   {
     id: 8,
-    name: "Art",
-    teachers: ["Harriet Alvarado", "Mayme Keller"],
+    name: "فنون",
+    teachers: ["علياء سامي"],
   },
   {
     id: 9,
-    name: "Music",
-    teachers: ["Gertrude Roy", "Rosa Singleton"],
+    name: "موسيقى",
+    teachers: ["علياء سامي"],
   },
   {
     id: 10,
-    name: "Literature",
-    teachers: ["Effie Lynch", "Brett Flowers"],
+    name: "أدب عربي",
+    teachers: ["سارة محمد"],
   },
 ];
+
 
 export const classesData = [
   {
