@@ -42,7 +42,7 @@ const menuItems = [
       {
         icon: "/subject.png",
         label: "المواضيع",
-        href: "/Dashboard/subjects",
+        href: "/Dashboard/list/subjects",
         visible: ["admin"],
       },
       {
