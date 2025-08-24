@@ -61,7 +61,7 @@ const menuItems = [
       {
         icon: "/assignment.png",
         label: "الواجبات",
-        href: "/Dashboard/assignments",
+        href: "/Dashboard/list/assignments",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
