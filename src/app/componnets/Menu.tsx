@@ -24,13 +24,13 @@ const menuItems = [
       {
         icon: "/teacher.png",
         label: "المعلمين",
-        href: "/Dashboard/teacher",
+        href: "/Dashboard/list/teachers",
         visible: ["admin", "teacher"],
       },
       {
         icon: "/student.png",
         label: "الطلاب",
-        href: "/Dashboard/student",
+        href: "/Dashboard/list/students",
         visible: ["admin", "teacher"],
       },
       {

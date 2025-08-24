@@ -3,7 +3,7 @@ import EventCalender from '../../componnets/EventCalender'
 import Announcements from '../../componnets/Announcements'
 import BigCalendar from '../../componnets/BigCalendar'
 
-const page = () => {
+const StudentPage = () => {
   return (
     <div className="p-4 flex gap-4 flex-col lg:flex-row" dir='rtl'>
       {/* right */}
@@ -19,4 +19,4 @@ const page = () => {
   )
 }
 
-export default page
+export default StudentPage
