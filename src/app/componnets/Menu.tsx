@@ -41,26 +41,21 @@ const menuItems = [
       },
       {
         icon: "/subject.png",
-        label: "المواضيع",
+        label: "المواد",
         href: "/Dashboard/list/subjects",
         visible: ["admin"],
       },
       {
         icon: "/class.png",
         label: "الصفوف",
-        href: "/Dashboard/classes",
+        href: "/Dashboard/list/classes",
         visible: ["admin", "teacher"],
       },
-      {
-        icon: "/lesson.png",
-        label: "الدروس",
-        href: "/Dashboard/lessons",
-        visible: ["admin", "teacher"],
-      },
+
       {
         icon: "/exam.png",
         label: "الامتحانات",
-        href: "/Dashboard/exams",
+        href: "/Dashboard/list/exams",
         visible: ["admin", "teacher", "student", "parent"],
       },
       {

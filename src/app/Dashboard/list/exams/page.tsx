@@ -4,38 +4,39 @@ import Table from "@/app/componnets/Table";
 import Link from "next/link";
 
 import Image from "next/image";
-import { role, parentsData } from "@/lib/data";
-interface IParent {
+import { role, examsData } from "@/lib/data";
+import Parents from "../parents/page";
+interface IExam {
     name: string;
-    photo: string;
-    students: string[];
-    phone: string;
-    address: string;
+    subject: string;
     email?: string;
+    class:string;
+    teacher:string;
+    date: string;
     id: number;
 }
 
 const columns = [
     {
-        name: "اسم ولي الامر",
-        accessor: "name",
+        name: "المادة",
+        accessor: "subject",
         className: "text-center",
     },
     {
-        name: "الطلاب",
-        accessor: "students",
+        name: "الصف",
+        accessor: "class",
         className: "hidden md:table-cell text-center",
     },
     {
-        name: "رقم الهاتف",
-        accessor: "phone",
+        name: "المعلم",
+        accessor: "teacher",
         className: "hidden md:table-cell text-center",
     },
 
 
     {
-        name: "العنوان",
-        accessor: "address",
+        name: "تاريخ الامتحان",
+        accessor: "date",
         className: "hidden md:table-cell hidden lg:table-cell text-center",
     },
     {
@@ -45,18 +46,17 @@ const columns = [
     },
 
 ]
-const Parents = () => {
-    const renderRow = (item: IParent) => (
+const Exams = () => {
+    const renderRow = (item: IExam) => (
         <tr key={item.id} className="hover:bg-slate-100 border-b even:bg-slate-50">
             <td className="w-full md:w-auto flex flex-row gap-3 m-3">
                 <div className="flex flex-col">
-                    <h3 className="font-semibold">{item.name}</h3>
-                    <h4 className="text-xs text-gray-500">{item?.email}</h4>
+                    <h3 className="font-semibold">{item.subject}</h3>
                 </div>
             </td>
-            <td className="hidden md:table-cell text-center">{item.students.join(", ")}</td>
-            <td className="hidden md:table-cell text-center">{item.phone}</td>
-            <td className="hidden lg:table-cell text-center">{item.address}</td>
+            <td className="hidden md:table-cell text-center">{item.class}</td>
+            <td className="hidden md:table-cell text-center">{item.teacher}</td>
+            <td className="hidden lg:table-cell text-center">{item.date}</td>
             <td>
                 <div className="flex items-center gap-2">
                     <Link href={`/Dashboard/list/students/${item.id}`}>
@@ -77,7 +77,7 @@ const Parents = () => {
     return (
         <div className="bg-white p-4 rounded-md mt-4" dir="rtl">
             <div className="flex items-center justify-between">
-                <h1 className="hidden md:block text-lg font-semibold mr-2">قائمة  اولياء الامور</h1>
+                <h1 className="hidden md:block text-lg font-semibold mr-2">قائمة  الامتحانات</h1>
                 <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                     <Search />
                     <div className="flex items-center gap-4">
@@ -93,11 +93,11 @@ const Parents = () => {
                     </div>
                 </div>
             </div>
-            <Table columns={columns} renderRow={renderRow} data={parentsData} />
+            <Table columns={columns} renderRow={renderRow} data={examsData} />
             <Pagination />
         </div>
     );
 };
 
-export default Parents;
+export default Exams;
 

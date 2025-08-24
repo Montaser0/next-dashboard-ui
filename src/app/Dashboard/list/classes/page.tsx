@@ -4,40 +4,38 @@ import Table from "@/app/componnets/Table";
 import Link from "next/link";
 
 import Image from "next/image";
-import { role, parentsData } from "@/lib/data";
-interface IParent {
+import { role, classesData } from "@/lib/data";
+interface IClass {
     name: string;
-    photo: string;
-    students: string[];
-    phone: string;
-    address: string;
+    supervisor: string[];
     email?: string;
+    capacity: number;
+    grade: number;
     id: number;
 }
 
 const columns = [
     {
-        name: "اسم ولي الامر",
+        name: " الصف",
         accessor: "name",
         className: "text-center",
     },
     {
-        name: "الطلاب",
-        accessor: "students",
+        name: "السعة",
+        accessor: "capacity",
         className: "hidden md:table-cell text-center",
     },
     {
-        name: "رقم الهاتف",
-        accessor: "phone",
+        name: "الدرجة",
+        accessor: "grade",
+        className: "hidden md:table-cell text-center",
+    },
+    {
+        name: "المشرف",
+        accessor: "supervisor",
         className: "hidden md:table-cell text-center",
     },
 
-
-    {
-        name: "العنوان",
-        accessor: "address",
-        className: "hidden md:table-cell hidden lg:table-cell text-center",
-    },
     {
         name: "الاجراءات",
         accessor: "actions",
@@ -45,18 +43,17 @@ const columns = [
     },
 
 ]
-const Parents = () => {
-    const renderRow = (item: IParent) => (
+const Classes = () => {
+    const renderRow = (item: IClass) => (
         <tr key={item.id} className="hover:bg-slate-100 border-b even:bg-slate-50">
             <td className="w-full md:w-auto flex flex-row gap-3 m-3">
-                <div className="flex flex-col">
+                <div className="flex justify-center items-center">
                     <h3 className="font-semibold">{item.name}</h3>
-                    <h4 className="text-xs text-gray-500">{item?.email}</h4>
                 </div>
             </td>
-            <td className="hidden md:table-cell text-center">{item.students.join(", ")}</td>
-            <td className="hidden md:table-cell text-center">{item.phone}</td>
-            <td className="hidden lg:table-cell text-center">{item.address}</td>
+            <td className="hidden md:table-cell text-center">{item.capacity}</td>
+            <td className="hidden md:table-cell text-center">{item.grade}</td>
+            <td className="hidden md:table-cell text-center">{item.supervisor}</td>
             <td>
                 <div className="flex items-center gap-2">
                     <Link href={`/Dashboard/list/students/${item.id}`}>
@@ -93,11 +90,11 @@ const Parents = () => {
                     </div>
                 </div>
             </div>
-            <Table columns={columns} renderRow={renderRow} data={parentsData} />
+            <Table columns={columns} renderRow={renderRow} data={classesData} />
             <Pagination />
         </div>
     );
 };
 
-export default Parents;
+export default Classes;
 
