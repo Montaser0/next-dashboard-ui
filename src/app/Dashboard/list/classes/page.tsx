@@ -74,7 +74,7 @@ const Classes = () => {
     return (
         <div className="bg-white p-4 rounded-md mt-4" dir="rtl">
             <div className="flex items-center justify-between">
-                <h1 className="hidden md:block text-lg font-semibold mr-2">قائمة  اولياء الامور</h1>
+                <h1 className="hidden md:block text-lg font-semibold mr-2">قائمة  الصفوف</h1>
                 <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                     <Search />
                     <div className="flex items-center gap-4">
