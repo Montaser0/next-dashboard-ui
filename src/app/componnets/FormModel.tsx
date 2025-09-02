@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import React from 'react'
+import TeacherForm from './TeacherForm.tsx/page';
 
 
 const FormModel = ({
@@ -24,7 +25,7 @@ const FormModel = ({
     | "attendance"
     | "event"
     | "announcement";
-    type: "create" | "update" | "delete";
+    type: "create" | "update" | "delete" ;
     data?: any;
     id?: number;
 }) => {
@@ -48,7 +49,7 @@ const FormModel = ({
                         </div>
                        </form>
                     ):(
-                        'انشاء او تعديل'
+                        <TeacherForm type={type as "create" | "update"} data={data} />
                     )
 
                     
