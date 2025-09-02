@@ -41,8 +41,8 @@ const Navbar = () => {
               <p className='text-sm font-semibold text-gray-800'>أحمد محمد</p>
               <p className='text-xs text-gray-500'>مدير النظام</p>
             </div>
-            <div className='w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center'>
-              <User className='w-5 h-5 text-white' />
+            <div className='w-10 h-10 bg-gradient-to-br bg-Yellow rounded-full flex items-center justify-center'>
+              <User className='w-5 h-5 text-black' />
             </div>
           </div>
 
@@ -51,7 +51,7 @@ const Navbar = () => {
             <button className='p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all duration-200'>
               <Settings className='w-5 h-5' />
             </button>
-            <button className='p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all duration-200'>
+            <button className='p-2 bg-red-200  text-red-600   hover:text-red-600 hover:bg-red-50 rounded-xl transition-all duration-200'>
               <LogOut className='w-5 h-5' />
             </button>
           </div>

@@ -2,6 +2,7 @@ import Pagination from "@/app/componnets/Pagination";
 import Search from "@/app/componnets/Shearch";
 import Table from "@/app/componnets/Table";
 import Link from "next/link";
+import FormModel from "@/app/componnets/FormModel";
 
 import Image from "next/image";
 import { role, parentsData } from "@/lib/data";
@@ -59,15 +60,13 @@ const Parents = () => {
             <td className="hidden lg:table-cell text-center">{item.address}</td>
             <td>
                 <div className="flex items-center gap-2">
-                    <Link href={`/Dashboard/list/students/${item.id}`}>
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky p-2">
-                            <Image src="/edit.png" alt="edit" width={20} height={20} />
-                        </button>
-                    </Link>
+
                     {role === "admin" && (
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-purple p-2">
-                            <Image src="/delete.png" alt="delete" width={20} height={20} />
-                        </button>
+                        <>
+                            <FormModel table="parent" type="delete" id={item.id} />
+                            <FormModel table="parent" type="update" data={item} />
+
+                        </>
                     )}
                 </div>
             </td>
@@ -82,7 +81,7 @@ const Parents = () => {
                     <Search />
                     <div className="flex items-center gap-4">
                         {role === "admin" && (
-                            <button className="w-8 h-8 flex   rounded-full bg-Yellow p-2"><Image src="/plus.png" alt="delete" width={20} height={20} /></button>
+                            <FormModel table="parent" type="create" />
                         )}
                         <button className="w-8 h-8 flex rounded-full bg-Yellow p-2">
                             <Image src="/filter.png" alt="filter" width={20} height={20} />

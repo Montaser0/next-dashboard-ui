@@ -2,6 +2,8 @@ import Pagination from "@/app/componnets/Pagination";
 import Search from "@/app/componnets/Shearch";
 import Table from "@/app/componnets/Table";
 import Link from "next/link";
+import FormModel from "@/app/componnets/FormModel";
+
 
 import Image from "next/image";
 import { role, studentsData } from "@/lib/data";
@@ -67,9 +69,10 @@ const Students = () => {
             </button>
           </Link>
           {role === "admin" && (
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-purple p-2">
-              <Image src="/delete.png" alt="delete" width={20} height={20} />
-            </button>
+            // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-purple p-2">
+            //   <Image src="/delete.png" alt="delete" width={20} height={20} />
+            // </button>
+            <FormModel table="student" type="delete" id={parseInt(item.studentId)} />
           )}
         </div>
       </td>
@@ -84,7 +87,8 @@ const Students = () => {
           <Search />
           <div className="flex items-center gap-4">
             {role === "admin" && (
-              <button className="w-8 h-8 flex   rounded-full bg-Yellow p-2"><Image src="/plus.png" alt="delete" width={20} height={20} /></button>
+              // <button className="w-8 h-8 flex   rounded-full bg-Yellow p-2"><Image src="/plus.png" alt="delete" width={20} height={20} /></button>
+              <FormModel table="student" type="create" />
             )}
             <button className="w-8 h-8 flex rounded-full bg-Yellow p-2">
               <Image src="/filter.png" alt="filter" width={20} height={20} />
