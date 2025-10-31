@@ -1,0 +1,218 @@
+schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+}
+
+model Admin {
+  id       String  @id @default(uuid())
+  name     String
+  email    String  @unique
+  password String
+
+  @@map("admins")
+}
+
+model Teacher {
+  id        String          @id @default(uuid())
+  name      String
+  email     String          @unique
+  password  String
+  phone     String?
+
+   Relations
+  lessons       Lesson[]
+  supervisedClasses Class[]  @relation("ClassSupervisor")
+  teacherSubjects TeacherSubject[]
+
+  @@map("teachers")
+}
+
+model Parent {
+  id      String   @id @default(uuid())
+  name    String
+  email   String   @unique
+  phone   String?
+  address String?
+
+  Relations
+  students Student[]
+
+  @@map("parents")
+}
+
+model Grade {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+
+  // Relations
+  classes  Class[]
+  students Student[]
+
+  @@map("grades")
+}
+
+model Class {
+  id           String   @id @default(uuid())
+  name         String
+  gradeId      String
+  supervisorId String?  // teacher
+  room         String?
+
+  // Relations
+  grade      Grade    @relation(fields: [gradeId], references: [id])
+  supervisor Teacher? @relation("ClassSupervisor", fields: [supervisorId], references: [id])
+  students   Student[]
+  lessons    Lesson[]
+
+  @@map("classes")
+}
+
+model Subject {
+  id          String           @id @default(uuid())
+  name        String
+  description String?
+
+  // Relations
+  lessons         Lesson[]
+  teacherSubjects TeacherSubject[]
+
+  @@map("subjects")
+}
+
+model Student {
+  id             String   @id @default(uuid())
+  name           String
+  email          String   @unique
+  dateOfBirth    DateTime?
+  parentId       String?
+  gradeId        String?
+  classId        String?
+  enrollmentDate DateTime?
+
+  // Relations
+  parent    Parent?  @relation(fields: [parentId], references: [id])
+  grade     Grade?   @relation(fields: [gradeId], references: [id])
+  class     Class?   @relation(fields: [classId], references: [id])
+  examResults        ExamResult[]
+  assignmentResults  AssignmentResult[]
+  attendanceRecords  Attendance[]
+
+  @@map("students")
+}
+
+model Lesson {
+  id         String   @id @default(uuid())
+  title      String
+  classId    String
+  subjectId  String
+  teacherId  String
+  date       DateTime
+  startTime  String   // يمكن تغييره إلى DateTime لو تفضل
+  endTime    String
+
+  // Relations
+  class   Class   @relation(fields: [classId], references: [id])
+  subject Subject @relation(fields: [subjectId], references: [id])
+  teacher Teacher @relation(fields: [teacherId], references: [id])
+  exams       Exam[]
+  assignments Assignment[]
+  attendance  Attendance[]
+
+  @@map("lessons")
+}
+
+model Exam {
+  id        String @id @default(uuid())
+  lessonId  String
+  title     String
+  date      DateTime
+  maxScore  Int
+
+  // Relations
+  lesson      Lesson       @relation(fields: [lessonId], references: [id])
+  examResults ExamResult[]
+
+  @@map("exams")
+}
+
+model Assignment {
+  id         String @id @default(uuid())
+  lessonId   String
+  title      String
+  description String?
+  dueDate    DateTime?
+  maxScore   Int
+
+  // Relations
+  lesson            Lesson              @relation(fields: [lessonId], references: [id])
+  assignmentResults AssignmentResult[]
+
+  @@map("assignments")
+}
+
+model ExamResult {
+  id       String  @id @default(uuid())
+  examId   String
+  studentId String
+  score    Int
+  gradedAt DateTime?
+
+  // Relations
+  exam    Exam    @relation(fields: [examId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
+
+  @@map("exam_results")
+}
+
+model AssignmentResult {
+  id           String   @id @default(uuid())
+  assignmentId String
+  studentId    String
+  score        Int
+  submittedAt  DateTime?
+  gradedAt     DateTime?
+
+  // Relations
+  assignment Assignment @relation(fields: [assignmentId], references: [id])
+  student    Student    @relation(fields: [studentId], references: [id])
+
+  @@map("assignment_results")
+}
+
+model Attendance {
+  id         String           @id @default(uuid())
+  studentId  String
+  lessonId   String
+  status     AttendanceStatus
+  recordedAt DateTime?
+
+  // Relations
+  student Student @relation(fields: [studentId], references: [id])
+  lesson  Lesson  @relation(fields: [lessonId], references: [id])
+
+  @@map("attendance")
+}
+
+// Many-to-Many: Teacher <-> Subject (join table)
+model TeacherSubject {
+  id         String  @id @default(uuid())
+  teacherId  String
+  subjectId  String
+
+  teacher Teacher @relation(fields: [teacherId], references: [id])
+  subject Subject @relation(fields: [subjectId], references: [id])
+
+  @@unique([teacherId, subjectId])
+  @@map("teacher_subjects")
+}
