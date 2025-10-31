@@ -9,25 +9,25 @@ import Image from "next/image";
 const schema = z.object({
   username: z
     .string()
-    .min(3, { message: "Username must be at least 3 characters long!" })
-    .max(20, { message: "Username must be at most 20 characters long!" }),
-  email: z.string().email({ message: "Invalid email address!" }),
+    .min(3, { message: "اسم المستخدم يجب أن لا يقل عن 3 أحرف" })
+    .max(20, { message: "اسم المستخدم يجب أن لا يزيد عن 20 حرف" }),
+  email: z.string().email({ message: "البريد الإلكتروني غير صالح" }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters long!" }),
-  firstName: z.string().min(1, { message: "First name is required!" }),
-  lastName: z.string().min(1, { message: "Last name is required!" }),
-  phone: z.string().min(1, { message: "Phone is required!" }),
-  address: z.string().min(1, { message: "Address is required!" }),
-  bloodType: z.string().min(1, { message: "Blood Type is required!" }),
-  birthday: z.date({ message: "Birthday is required!" }),
-  sex: z.enum(["male", "female"], { message: "Sex is required!" }),
-  img: z.instanceof(File, { message: "Image is required" }),
+    .min(8, { message: "كلمة المرور يجب أن تكون 8 أحرف على الأقل" }),
+  firstName: z.string().min(1, { message: "الاسم الأول مطلوب" }),
+  lastName: z.string().min(1, { message: "اسم العائلة مطلوب" }),
+  phone: z.string().min(1, { message: "رقم الهاتف مطلوب" }),
+  address: z.string().min(1, { message: "العنوان مطلوب" }),
+  bloodType: z.string().min(1, { message: "فصيلة الدم مطلوبة" }),
+  birthday: z.string().min(1, { message: "تاريخ الميلاد مطلوب" }),
+  sex: z.enum(["male", "female"], { message: "النوع مطلوب" }),
+  img: z.any(),
 });
 
 type Inputs = z.infer<typeof schema>;
 
-const TeacherForm = ({
+const StudentForm = ({
   type,
   data,
 }: {
@@ -42,81 +42,79 @@ const TeacherForm = ({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit((formData) => {
+    console.log(formData);
   });
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={onSubmit}>
-      <h1 className="text-xl font-semibold">Create a new teacher</h1>
-      <span className="text-xs text-gray-400 font-medium">
-        Authentication Information
-      </span>
-      <div className="flex justify-between flex-wrap gap-4">
+    <form className="flex flex-col gap-8" onSubmit={onSubmit} dir="rtl">
+      <div className="text-center">
+        <h1 className="text-xl font-bold text-gray-600">
+          {type === "create" ? "إنشاء معلم جديد" : "تحديث بيانات المعلم"}
+        </h1>
+        <p className="text-gray-400 text-lg mt-2">
+          يرجى ملء جميع الحقول المطلوبة بدقة
+        </p>
+      </div>
+      <div className="flex justify-between gap-2">
         <InputField
-          label="Username"
+          label="اسم المستخدم"
           name="username"
           defaultValue={data?.username}
           register={register}
           error={errors?.username}
+          width="1/2"
         />
         <InputField
-          label="Email"
+          label="البريد الإلكتروني"
           name="email"
           defaultValue={data?.email}
           register={register}
           error={errors?.email}
-        />
-        <InputField
-          label="Password"
-          name="password"
-          type="password"
-          defaultValue={data?.password}
-          register={register}
-          error={errors?.password}
+          width="1/2"
         />
       </div>
       <span className="text-xs text-gray-400 font-medium">
-        Personal Information
+        المعلومات الشخصية
       </span>
       <div className="flex justify-between flex-wrap gap-4">
         <InputField
-          label="First Name"
+          label="الاسم الأول"
           name="firstName"
           defaultValue={data?.firstName}
           register={register}
           error={errors.firstName}
         />
         <InputField
-          label="Last Name"
+          label="اسم العائلة"
           name="lastName"
           defaultValue={data?.lastName}
           register={register}
           error={errors.lastName}
         />
         <InputField
-          label="Phone"
+          label="رقم الهاتف"
           name="phone"
           defaultValue={data?.phone}
           register={register}
           error={errors.phone}
         />
         <InputField
-          label="Address"
+          label="العنوان"
           name="address"
           defaultValue={data?.address}
           register={register}
           error={errors.address}
         />
         <InputField
-          label="Blood Type"
+          label="فصيلة الدم"
           name="bloodType"
           defaultValue={data?.bloodType}
           register={register}
           error={errors.bloodType}
         />
         <InputField
-          label="Birthday"
+          label="تاريخ الميلاد"
           name="birthday"
           defaultValue={data?.birthday}
           register={register}
@@ -124,42 +122,37 @@ const TeacherForm = ({
           type="date"
         />
         <div className="flex flex-col gap-2 w-full md:w-1/4">
-          <label className="text-xs text-gray-500">Sex</label>
+          <label className="text-xs text-gray-500">النوع</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
             {...register("sex")}
-            defaultValue={data?.sex}
           >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="male">ذكر</option>
+            <option value="female">أنثى</option>
           </select>
           {errors.sex?.message && (
-            <p className="text-xs text-red-400">
-              {errors.sex.message.toString()}
-            </p>
+            <p className="text-xs text-red-400">{errors.sex.message.toString()}</p>
           )}
         </div>
         <div className="flex flex-col gap-2 w-full md:w-1/4 justify-center">
           <label
-            className="text-xs text-gray-500 flex items-center gap-2 cursor-pointer"
+            className="text-xs text-gray-500 flex items-center gap-2 cursor-pointer border p-4 rounded-md"
             htmlFor="img"
           >
             <Image src="/upload.png" alt="" width={28} height={28} />
-            <span>Upload a photo</span>
+            <span>رفع صورة</span>
           </label>
           <input type="file" id="img" {...register("img")} className="hidden" />
           {errors.img?.message && (
-            <p className="text-xs text-red-400">
-              {errors.img.message.toString()}
-            </p>
+            <p className="text-xs text-red-400">{errors.img.message.toString()}</p>
           )}
         </div>
       </div>
-      <button className="bg-blue-400 text-white p-2 rounded-md">
-        {type === "create" ? "Create" : "Update"}
+      <button className={type==='create'?'bg-Yellow text-black p-2 rounded-md':'bg-sky text-black text-bold p-2 rounded-md'}>
+        {type === "create" ? "إنشاء" : "تحديث"}
       </button>
     </form>
   );
 };
 
-export default TeacherForm;
+export default StudentForm;

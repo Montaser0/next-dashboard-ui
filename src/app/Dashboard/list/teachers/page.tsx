@@ -76,8 +76,11 @@ const Teachers = () => {
                         </Link>
 
                         {role === "admin" &&
-                            // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-purple p-2"><Image src="/delete.png" alt="delete" width={20} height={20} /></button>
-                            <FormModel table="teacher" type="delete" id={item.id} />
+                            <>
+                                <FormModel table="teacher" type="delete" id={item.id} />
+                                <FormModel table="teacher" type="update" data={item} />
+
+                            </>
                         }
                     </div>
                 </td>
@@ -95,7 +98,7 @@ const Teachers = () => {
                     <Search />
                     {/* Buttons */}
                     <div className="flex items-center gap-4 ">
-                        {role === "admin" &&(
+                        {role === "admin" && (
                             <FormModel table="teacher" type="create" />
                         )}
                         <button className="w-8 h-8 flex   rounded-full bg-Yellow p-2"><Image src="/filter.png" alt="add" width={20} height={20} /></button>

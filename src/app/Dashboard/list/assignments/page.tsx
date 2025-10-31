@@ -5,11 +5,12 @@ import Link from "next/link";
 
 import Image from "next/image";
 import { role, assignmentsData } from "@/lib/data";
+import FormModel from "@/app/componnets/FormModel";
 interface IAssignment {
     subject: string;
     class: string;
     teacher: string;
-    dueDate : string;
+    dueDate: string;
     id: number;
 }
 
@@ -54,17 +55,14 @@ const Assignments = () => {
             <td className="hidden md:table-cell text-center">{item.class}</td>
             <td className="hidden md:table-cell text-center">{item.teacher}</td>
             <td className="hidden lg:table-cell text-center">{item.dueDate}</td>
-            <td>    
+            <td>
                 <div className="flex items-center gap-2">
-                    <Link href={`/Dashboard/list/assignments/${item.id}`}>
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky p-2">
-                            <Image src="/edit.png" alt="edit" width={20} height={20} />
-                        </button>
-                    </Link>
+
                     {role === "admin" && (
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-purple p-2">
-                            <Image src="/delete.png" alt="delete" width={20} height={20} />
-                        </button>
+                        <>
+                            <FormModel table="assignment" type="update" data={item} />
+                            <FormModel table="assignment" type="delete" id={item.id} />
+                        </>
                     )}
                 </div>
             </td>
@@ -79,7 +77,8 @@ const Assignments = () => {
                     <Search />
                     <div className="flex items-center gap-4">
                         {role === "admin" && (
-                            <button className="w-8 h-8 flex   rounded-full bg-Yellow p-2"><Image src="/plus.png" alt="delete" width={20} height={20} /></button>
+                            <FormModel table="assignment" type="create" />
+
                         )}
                         <button className="w-8 h-8 flex rounded-full bg-Yellow p-2">
                             <Image src="/filter.png" alt="filter" width={20} height={20} />

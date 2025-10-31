@@ -3,8 +3,43 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import React from 'react'
-import TeacherForm from './TeacherForm.tsx/page';
+import dynamic from 'next/dynamic';
+// import EventForm from './Forms/EventForm';
 
+// import TeacherForm from './Forms/TeacherForm';
+// import StudentForm from './Forms/StudentForm';
+
+const TeacherForm = dynamic(() => import('./Forms/TeacherForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+const StudentForm = dynamic(() => import('./Forms/StudentForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+const ParentForm = dynamic(() => import('./Forms/ParentForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+const SubjectForm = dynamic(() => import('./Forms/SubjectForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+const ClassForm = dynamic(() => import('./Forms/ClassForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+
+const ExamForm = dynamic(() => import('./Forms/ExamForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+const AssignmentForm = dynamic(() => import('./Forms/AssignmentForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+const ResultForm = dynamic(() => import('./Forms/ResultForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+const AttendanceForm = dynamic(() => import('./Forms/AttendanceForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
+const EventForm = dynamic(() => import('./Forms/EventForm'), {
+    loading: () => <p className='flex justify-center items-center'>يتم التحميل...</p>,
+})
 
 const FormModel = ({
     table,
@@ -39,20 +74,61 @@ const FormModel = ({
                 const [open, setOpen] = useState(false);
 
                 const Form = () =>{
-                    
-                    return type ==="delete" && id ?(
-                       <form action='' className='p-4 flex-col gap-4' >
-                        <h2 className='text-2xl font-bold'>حذف {table}</h2>
-                        <p className='text-sm'>هل أنت متأكد من حذف هذا العنصر؟</p>
-                        <div className='flex justify-end'>
-                            <button className='bg-red-500 text-white px-4 py-2 rounded-md'>حذف</button>
-                        </div>
-                       </form>
-                    ):(
-                        <TeacherForm type={type as "create" | "update"} data={data} />
-                    )
+                    if(type ==="delete" && id){
+                        return (
+                           <form action='' className='p-4 flex flex-col gap-4' >
+                            <h2 className='text-2xl font-bold'>حذف {table}</h2>
+                            <p className='text-sm'>هل أنت متأكد من حذف هذا العنصر؟</p>
+                            <div className='flex justify-end'>
+                                <button className='bg-red-500 text-white px-4 py-2 rounded-md'>حذف</button>
+                            </div>
+                           </form>
+                        )
+                    }
 
+                    if(table === "teacher"){
+                        return <TeacherForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "student"){
+                        return <StudentForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "parent"){
+                        return <ParentForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "subject"){
+                        return <SubjectForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "class"){
+                        return <ClassForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "exam"){
+                        return <ExamForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "assignment"){
+                        return <AssignmentForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "result"){
+                        return <ResultForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "attendance"){
+                        return <AttendanceForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "event"){
+                        return <EventForm type={type as "create" | "update"} data={data} />
+                    }
+                    if(table === "announcement"){
+                        return (
+                            <div className='p-4'>
+                                <h2 className='text-lg font-semibold'>النموذج غير متوفر بعد لهذا النوع: {table}</h2>
+                            </div>
+                        )
+                    }
                     
+                    return (
+                        <div className='p-4'>
+                            <h2 className='text-lg font-semibold'>النموذج غير متوفر لهذا النوع: {table}</h2>
+                        </div>
+                    )
                 }
     return (
         <>
@@ -61,19 +137,19 @@ const FormModel = ({
         >
             <Image 
                 src={`/${type}.png`}
-                alt=''
+                alt='action-icon'
                 width={16}
                 height={16}
                 ></Image>
                 
              </button>
              {open && (
-                <div className='w-screen h-screen bg-black absolute bg-opacity-60 left-0 top-0 z-50 flex items-center justify-center'>
+                <div className='w-screen h-screen bg-black fixed bg-opacity-60 left-0 top-0 z-50 flex items-center justify-center'>
                     <div className='bg-white p-4 rounded-lg relative w-[60%] md:w-[70%] lg:w-[50%] xl:w-[50%] 2xl:w-[40%]'>
                         <button className='absolute top-4 right-4 cursor-pointer text-red-500' onClick={() => setOpen(false)}>
                             <Image 
                                 src={`/close.png`}
-                                alt=''
+                                alt='close'
                                 width={17}
                                 height={17}
                                 ></Image>

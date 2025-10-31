@@ -3,9 +3,29 @@ import BigCalendar from '@/app/componnets/BigCalendar'
 import Performance from '@/app/componnets/Performance'
 import Image from 'next/image'
 import Link from "next/link";
+import SingleTeacher from '../../teachers/[id]/page';
+import FormModel from '@/app/componnets/FormModel';
 
+const item = {
+    teacherId: 1,
+    username:' منتصر الحاج عمر', 
+    firstName: "منتصر",
+    lastName: " الحاج عمر",
+    email: "montaser@example.com",
+    phone: "1234567890",
+    password: "123456",
+    confirmPassword: "123456",
+    address: "العنوان",
+    city: "المدينة",
+    country: "الدولة",
+    postCode: "12345",
+    gender: "ذكر",
+    dateOfBirth: "2000-01-01",
+    bloodType: "A+",
+    profilePicture: "/teacher.jpg",
+}
 
-const SingleTeacher = () => {
+const SingleStudent = () => {   
     return (
         <div className="flex-1 p-4 flex flex-col xl:flex-row" dir="rtl">
             {/* right */}
@@ -26,8 +46,10 @@ const SingleTeacher = () => {
                         </div>
                         {/* Info */}
                         <div className="w-2/3 flex flex-col justify-between gap-4">
-                            <h1 className="text-2xl font-bold">
-                                أحمد مصطفى                            </h1>
+                            <h1 className="text-2xl font-bold flex justify-between items-center">
+                                {item.firstName} {item.lastName}
+                            <FormModel table="student" type="update" data={item} />
+                            </h1>
                             <p className='text-sm text-gray-500'>طالب في المدرسة في الصف الاول</p>
                             <div className='flex items-center justify-between gap-2 flex-wrap text-xs font-medium'>
                                 <div className='flex items-center gap-1 text-gray-500 gap-2'>
@@ -121,4 +143,4 @@ const SingleTeacher = () => {
     )
 }
 
-export default SingleTeacher
+export default SingleStudent

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 import { role, classesData } from "@/lib/data";
+import FormModel from "@/app/componnets/FormModel";
 interface IClass {
     name: string;
     supervisor: string[];
@@ -56,15 +57,12 @@ const Classes = () => {
             <td className="hidden md:table-cell text-center">{item.supervisor}</td>
             <td>
                 <div className="flex items-center gap-2">
-                    <Link href={`/Dashboard/list/classes/${item.id}`}>
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky p-2">
-                            <Image src="/edit.png" alt="edit" width={20} height={20} />
-                        </button>
-                    </Link>
+                    <FormModel table="class" type="update" data={item} />
+
                     {role === "admin" && (
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-purple p-2">
-                            <Image src="/delete.png" alt="delete" width={20} height={20} />
-                        </button>
+                        <>
+                            <FormModel table="class" type="delete" id={item.id} />
+                        </>
                     )}
                 </div>
             </td>
@@ -79,7 +77,8 @@ const Classes = () => {
                     <Search />
                     <div className="flex items-center gap-4">
                         {role === "admin" && (
-                            <button className="w-8 h-8 flex   rounded-full bg-Yellow p-2"><Image src="/plus.png" alt="delete" width={20} height={20} /></button>
+                            <FormModel table="class" type="create" />
+
                         )}
                         <button className="w-8 h-8 flex rounded-full bg-Yellow p-2">
                             <Image src="/filter.png" alt="filter" width={20} height={20} />

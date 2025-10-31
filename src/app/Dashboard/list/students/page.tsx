@@ -15,7 +15,7 @@ interface IStudent {
   address: string;
   email?: string;
   grade: string;
-  studentId: string;
+  studentId: number;
 }
 
 const columns = [
@@ -72,7 +72,11 @@ const Students = () => {
             // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-purple p-2">
             //   <Image src="/delete.png" alt="delete" width={20} height={20} />
             // </button>
-            <FormModel table="student" type="delete" id={parseInt(item.studentId)} />
+            <>
+              <FormModel table="student" type="delete" id={item.studentId} />
+              <FormModel table="student" type="update" data={item} />
+            </>
+
           )}
         </div>
       </td>

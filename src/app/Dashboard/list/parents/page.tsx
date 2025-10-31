@@ -64,7 +64,7 @@ const Parents = () => {
                     {role === "admin" && (
                         <>
                             <FormModel table="parent" type="delete" id={item.id} />
-                            <FormModel table="parent" type="update" data={item} />
+                            <FormModel table="parent" type="update" data={item.id} />
 
                         </>
                     )}

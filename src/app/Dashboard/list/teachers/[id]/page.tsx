@@ -1,10 +1,28 @@
 import Announcements from '@/app/componnets/Announcements'
 import BigCalendar from '@/app/componnets/BigCalendar'
+import FormModel from '@/app/componnets/FormModel';
 import Performance from '@/app/componnets/Performance'
 import Image from 'next/image'
 import Link from "next/link";
 
-
+const item = {
+    teacherId: 1,
+    username:' منتصر الحاج عمر', 
+    firstName: "منتصر",
+    lastName: " الحاج عمر",
+    email: "montaser@example.com",
+    phone: "1234567890",
+    password: "123456",
+    confirmPassword: "123456",
+    address: "العنوان",
+    city: "المدينة",
+    country: "الدولة",
+    postCode: "12345",
+    gender: "ذكر",
+    dateOfBirth: "2000-01-01",
+    bloodType: "A+",
+    profilePicture: "/teacher.jpg",
+}
 const SingleTeacher = () => {
     return (
         <div className="flex-1 p-4 flex flex-col xl:flex-row" dir="rtl">
@@ -26,9 +44,11 @@ const SingleTeacher = () => {
                         </div>
                         {/* Info */}
                         <div className="w-2/3 flex flex-col justify-between gap-4">
-                            <h1 className="text-2xl font-bold">
+                            <h1 className="text-2xl font-bold flex justify-between items-center">
                                 منتصر الحاج عمر
+                            <FormModel table="teacher" type="update" data={item} />
                             </h1>
+
                             <p className='text-sm text-gray-500'>مهندس برمجيات يقدم دروس في الحاسوب والبرمجة</p>
                             <div className='flex items-center justify-between gap-2 flex-wrap text-xs font-medium'>
                                 <div className='flex items-center gap-1 text-gray-500 gap-2'>
@@ -94,7 +114,7 @@ const SingleTeacher = () => {
             </div>
             {/* left */}
             <div className="w-full xl:w-1/3">
-            
+
                 <div className="bg-white p-4 rounded-md">
                     <h1 className="text-xl font-semibold">الاختصارات</h1>
                     <div className="mt-4 flex gap-4 flex-wrap text-xs text-gray-500">

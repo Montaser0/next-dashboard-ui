@@ -5,10 +5,11 @@ import Link from "next/link";
 
 import Image from "next/image";
 import { role, announcementsData } from "@/lib/data";
+import FormModel from "@/app/componnets/FormModel";
 interface IAnnouncement {
     title: string;
     class: string;
-    date : string;
+    date: string;
     id: number;
 }
 
@@ -28,7 +29,7 @@ const columns = [
         accessor: "date",
         className: "hidden md:table-cell  text-center",
     },
-  
+
     {
         name: "الاجراءات",
         accessor: "actions",
@@ -37,7 +38,7 @@ const columns = [
 
 ]
 const Announcements = () => {
-    const renderRow = (item:  IAnnouncement) => (
+    const renderRow = (item: IAnnouncement) => (
         <tr key={item.id} className="hover:bg-slate-100 border-b even:bg-slate-50">
             <td className="w-full md:w-auto flex flex-row gap-3 m-3">
                 <div className="flex flex-col">
@@ -46,17 +47,14 @@ const Announcements = () => {
             </td>
             <td className="hidden md:table-cell text-center">{item.class}</td>
             <td className="hidden lg:table-cell text-center">{item.date}</td>
-            <td>    
+            <td>
                 <div className="flex items-center gap-2">
-                    <Link href={`/Dashboard/list/announcements/${item.id}`}>
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky p-2">
-                            <Image src="/edit.png" alt="edit" width={20} height={20} />
-                        </button>
-                    </Link>
+
                     {role === "admin" && (
-                        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-purple p-2">
-                            <Image src="/delete.png" alt="delete" width={20} height={20} />
-                        </button>
+                        <>
+                            <FormModel table="announcement" type="delete" id={item.id} />
+                            <FormModel table="announcement" type="update" data={item} />
+                        </>
                     )}
                 </div>
             </td>
@@ -71,7 +69,8 @@ const Announcements = () => {
                     <Search />
                     <div className="flex items-center gap-4">
                         {role === "admin" && (
-                            <button className="w-8 h-8 flex   rounded-full bg-Yellow p-2"><Image src="/plus.png" alt="delete" width={20} height={20} /></button>
+                            <FormModel table="announcement" type="create" />
+
                         )}
                         <button className="w-8 h-8 flex rounded-full bg-Yellow p-2">
                             <Image src="/filter.png" alt="filter" width={20} height={20} />
